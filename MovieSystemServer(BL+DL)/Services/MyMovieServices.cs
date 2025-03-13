@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-	public class MovieService
+	public class MyMovieService
 	{
 		private readonly MovieRepositoryImpl _movieRepository;
 
-		public MovieService(MovieRepositoryImpl movieRepository)
+		public MyMovieService(MovieRepositoryImpl movieRepository)
 		{
 			_movieRepository = movieRepository;
 		}
@@ -32,7 +32,7 @@ namespace BL.Services
 		int pageSize,
 		string genreFilter = null,
 		string actorFilter = null,
-		string sortBy = null) // Новый параметр для сортировки
+		string sortBy = null) // параметр для сортировки
 		{
 			// Валидация параметров
 			if (pageNumber < 1)

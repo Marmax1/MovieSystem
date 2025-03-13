@@ -23,11 +23,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-	  <Protobuf Include="movie.proto" GrpcServices="Server" />
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="Protos\movies.proto" GrpcServices="Server" />
+	</ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 

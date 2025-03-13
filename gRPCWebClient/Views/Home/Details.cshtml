@@ -1,0 +1,14 @@
+﻿@model MovieViewModel
+
+<h2>@Model.Title</h2>
+
+<ul>
+    <li><strong>Год выпуска:</strong> @Model.ReleaseYear</li>
+    <li><strong>Рейтинг:</strong> @Model.Rating</li>
+    <li><strong>Режиссер:</strong> @Model.DirectorName</li>
+    <li><strong>Студия:</strong> @Model.StudioName</li>
+    <li><strong>Жанры:</strong> @string.Join(", ", Model.Genres)</li>
+    <li><strong>Актеры:</strong> @string.Join(", ", Model.Actors)</li>
+</ul>
+
+<a asp-action="Index">Назад к списку</a>

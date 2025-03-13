@@ -1,0 +1,38 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "MovieSystem.Grpc";
+
+package movies;
+
+service MovieService {
+    rpc GetMovie (GetMovieRequest) returns (MovieResponse);
+    rpc GetMovies (GetMoviesRequest) returns (GetMoviesResponse);
+}
+
+message GetMovieRequest {
+    int32 id = 1;
+}
+
+message MovieResponse {
+    int32 id = 1;
+    string title = 2;
+    int32 release_year = 3;
+    double rating = 4;
+    string director_name = 5;
+    string studio_name = 6;
+    repeated string genres = 7;
+    repeated string actors = 8;
+}
+
+message GetMoviesRequest {
+    int32 page_number = 1;
+    int32 page_size = 2;
+    string genre_filter = 3;
+    string actor_filter = 4;
+    string sort_by = 5;
+}
+
+message GetMoviesResponse {
+    repeated MovieResponse movies = 1;
+    int32 total_count = 2;
+}

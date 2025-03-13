@@ -1,0 +1,73 @@
+﻿@model List<MovieViewModel>
+@{
+    var filter = ViewBag.Filter as MoviesFilterModel;
+    var totalCount = ViewBag.TotalCount;
+    var totalPages = (int)Math.Ceiling((double)totalCount / filter.PageSize);
+}
+
+<h1>Список фильмов</h1>
+
+<form method="get" asp-action="Index">
+    <div>
+        <label>Жанр:</label>
+        <input type="text" name="GenreFilter" value="@filter.GenreFilter" />
+    </div>
+    <div>
+        <label>Актер:</label>
+        <input type="text" name="ActorFilter" value="@filter.ActorFilter" />
+    </div>
+    <div>
+        <label>Сортировка:</label>
+        <select name="SortBy">
+            <option value="">-- Выберите --</option>
+            <option value="title" selected="@(filter.SortBy == "title")">По названию (возрастание)</option>
+            <option value="title_desc" selected="@(filter.SortBy == "title_desc")">По названию (убывание)</option>
+            <option value="year" selected="@(filter.SortBy == "year")">По году выпуска (возрастание)</option>
+            <option value="year_desc" selected="@(filter.SortBy == "year_desc")">По году выпуска (убывание)</option>
+            <option value="rating" selected="@(filter.SortBy == "rating")">По рейтингу (возрастание)</option>
+            <option value="rating_desc" selected="@(filter.SortBy == "rating_desc")">По рейтингу (убывание)</option>
+        </select>
+    </div>
+    <button type="submit">Применить</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Год выпуска</th>
+            <th>Рейтинг</th>
+            <th>Режиссер</th>
+            <th>Студия</th>
+            <th>Жанры</th>
+            <th>Актеры</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@movie.Id">@movie.Title</a></td>
+                <td>@movie.ReleaseYear</td>
+                <td>@movie.Rating</td>
+                <td>@movie.DirectorName</td>
+                <td>@movie.StudioName</td>
+                <td>@string.Join(", ", movie.Genres)</td>
+                <td>@string.Join(", ", movie.Actors)</td>
+            </tr>
+        }
+</tbody>
+</table>
+
+<div>
+    @for (int i = 1; i <= totalPages; i++)
+    {
+        <a href="@Url.Action("Index", new { 
+            PageNumber = i, 
+            PageSize = filter.PageSize, 
+            GenreFilter = filter.GenreFilter, 
+            ActorFilter = filter.ActorFilter, 
+            SortBy = filter.SortBy 
+        })">@i</a>
+    }
+</div>
